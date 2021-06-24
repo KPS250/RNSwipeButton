@@ -27,6 +27,10 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     marginVertical: -borderWidth,
   },
+  title: {
+    alignSelf: 'center',
+    position: 'absolute',
+  },
 });
 
 export default Styles;

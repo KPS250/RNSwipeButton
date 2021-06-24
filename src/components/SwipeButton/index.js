@@ -113,20 +113,7 @@ const SwipeButton = props => {
         },
       ]}
       onLayout={onLayoutContainer}>
-      <Text
-        importantForAccessibility={
-          screenReaderEnabled ? 'no-hide-descendants' : ''
-        }
-        style={[
-          styles.title,
-          {
-            color: titleColor,
-            fontSize: titleFontSize,
-            ...titleStyles,
-          },
-        ]}>
-        {title}
-      </Text>
+     
       {layoutWidth > 0 && (
         <SwipeThumb
           disabled={disabled}
@@ -154,6 +141,7 @@ const SwipeButton = props => {
           thumbIconImageSource={thumbIconImageSource}
           thumbIconStyles={thumbIconStyles}
           title={title}
+          titleStyles={titleStyles}
         />
       )}
     </View>

@@ -7,6 +7,7 @@ import {
   PanResponder,
   TouchableNativeFeedback,
   View,
+  Text,
 } from 'react-native';
 
 // Styles
@@ -31,7 +32,7 @@ const SwipeThumb = props => {
 
   const [backgroundColor, setBackgroundColor] = useState(TRANSPARENT_COLOR);
   const [borderColor, setBorderColor] = useState(TRANSPARENT_COLOR);
-
+  const [progress, setProgress] = useState(0);
   const panResponder = useCallback(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -56,12 +57,14 @@ const SwipeThumb = props => {
 
   useEffect(() => {
     forceReset && forceReset(reset);
+    setProgress(0);
   }, [forceReset]);
 
   function onSwipeNotMetSuccessThreshold() {
     // Animate to initial position
     setDefaultWidth(defaultContainerWidth);
     props.onSwipeFail && props.onSwipeFail();
+    setProgress(0);
   }
 
   function onSwipeMetSuccessThreshold(newWidth) {
@@ -89,6 +92,10 @@ const SwipeThumb = props => {
     const newWidth =
       defaultContainerWidth +
       rtlMultiplier * reverseMultiplier * gestureState.dx;
+
+      let widthForPercent = newWidth < defaultContainerWidth ? defaultContainerWidth : newWidth > maxWidth ? maxWidth : newWidth;
+      let percentProgress = (widthForPercent/maxWidth).toFixed(2);
+      
     if (newWidth < defaultContainerWidth) {
       // Reached starting position
       reset();
@@ -105,6 +112,7 @@ const SwipeThumb = props => {
       }).start();
       setDefaultWidth(newWidth);
     }
+    setProgress(percentProgress);
   }
 
   function onPanResponderRelease(event, gestureState) {
@@ -161,6 +169,7 @@ const SwipeThumb = props => {
       setBackgroundColor(TRANSPARENT_COLOR);
       setBorderColor(TRANSPARENT_COLOR);
     }
+    setProgress(0);
   }
 
   function renderThumbIcon() {
@@ -221,6 +230,16 @@ const SwipeThumb = props => {
 
   return (
     <>
+    <Text
+    importantForAccessibility={
+      screenReaderEnabled ? 'no-hide-descendants' : ''
+    }
+    style={[
+      styles.title,
+      { ...props.titleStyles, opacity : 1-progress,}
+    ]}>
+    {title}
+  </Text>
       {screenReaderEnabled ? (
         <TouchableNativeFeedback
           accessibilityLabel={`${title}. ${
