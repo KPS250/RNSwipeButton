@@ -218,6 +218,7 @@ const SwipeThumb = props => {
     railStyles,
     screenReaderEnabled,
     title,
+    secondaryIcon
   } = props;
 
   const panStyle = {
@@ -230,6 +231,8 @@ const SwipeThumb = props => {
 
   return (
     <>
+    <View style={styles.innerContainer}>
+    {secondaryIcon && React.cloneElement(secondaryIcon, {style: {...styles.secondaryIcon, opacity: 1-progress}})}
     <Text
     importantForAccessibility={
       screenReaderEnabled ? 'no-hide-descendants' : ''
@@ -239,7 +242,10 @@ const SwipeThumb = props => {
       { ...props.titleStyles, opacity : 1-progress,}
     ]}>
     {title}
+   
   </Text>
+  
+  </View>
       {screenReaderEnabled ? (
         <TouchableNativeFeedback
           accessibilityLabel={`${title}. ${

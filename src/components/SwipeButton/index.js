@@ -98,6 +98,7 @@ const SwipeButton = props => {
     titleFontSize,
     titleStyles,
     width,
+    secondaryIcon
   } = props;
   return (
     <View
@@ -142,6 +143,7 @@ const SwipeButton = props => {
           thumbIconStyles={thumbIconStyles}
           title={title}
           titleStyles={titleStyles}
+          secondaryIcon={secondaryIcon}
         />
       )}
     </View>
@@ -168,6 +170,7 @@ SwipeButton.defaultProps = {
   titleColor: TITLE_COLOR,
   titleFontSize: 20,
   titleStyles: {},
+  secondaryIcon: null,
 };
 
 SwipeButton.propTypes = {

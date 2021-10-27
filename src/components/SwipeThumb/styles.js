@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const borderWidth = 3;
 const margin = 1;
 const maxContainerHeight = 100;
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-end',
     alignSelf: 'flex-start',
@@ -27,11 +27,19 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     marginVertical: -borderWidth,
   },
-  title: {
+  innerContainer: {
+    flexDirection: 'row',
     alignSelf: 'center',
     position: 'absolute',
+    alignItems: 'center',
   },
+  title: {},
+  secondaryIcon:{
+    width: 23,
+    height: 10,
+    marginRight: 20
+  }
 });
 
-export default Styles;
+export default styles;
 export { borderWidth, margin };
